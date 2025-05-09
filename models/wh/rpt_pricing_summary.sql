@@ -25,7 +25,7 @@ select
     
 from
     {{ ref('fct_orders_items') }} f
-where
-    f.ship_date <= {{ dbt_utils.dateadd('day', -90, var('max_ship_date')) }}
+where true
+
 group by
     1,2    
