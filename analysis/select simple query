@@ -1,0 +1,11 @@
+
+
+select 
+date_trunc('month',order_date) as order_month3,
+sum(gross_item_sales_amount) as gross_item_sales_amount,
+sum(discounted_item_sales_amount) as discounted_item_sales_amount,
+count(*) as partition_cnt,
+(select count(*) from fct_orders_items) as all_row_count
+from 
+fct_orders_items
+group by all;

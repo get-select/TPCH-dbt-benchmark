@@ -1,0 +1,30 @@
+
+
+
+with q as (
+SELECT
+  dc.customer_region_name,
+  dc.customer_market_segment_name,
+  ds.supplier_region_name,
+  COUNT(DISTINCT oi.order_key) AS total_ordersss,
+  COUNT(DISTINCT dc.customer_key) AS unique_customers,
+  SUM(oi.gross_item_sales_amount) AS total_sales,
+  AVG(oi.discounted_price) AS avg_discounted_price,
+  SUM(oi.quantity) AS total_items_sold,
+  (select count(*) from orders_items) as cnt
+FROM
+  orders_items AS oi
+  JOIN dim_customer AS dc ON oi.customer_key = dc.customer_key
+  JOIN dim_supplier AS ds ON oi.supplier_key = ds.supplier_key
+WHERE
+  true
+  AND oi.order_status_code ILIKE '%F%'
+  AND oi.gross_item_sales_amount > 0
+GROUP BY
+  dc.customer_region_name,
+  dc.customer_market_segment_name,
+  ds.supplier_region_name
+  
+  )
+  select *, (select count(*) from q ) as cnt_2 from q
+  ;

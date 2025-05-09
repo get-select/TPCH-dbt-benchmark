@@ -1,0 +1,3 @@
+alter table fct_orders_items add column foo text; 
+update fct_orders_items set foo = 'abc1';
+-- the value shown as `abc1` was changed every time I ran the query.

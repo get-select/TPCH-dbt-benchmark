@@ -1,0 +1,47 @@
+-- this query was run against different warehoues based on the data created by dbt for the different tpch scale factors
+
+
+MERGE INTO fct_orders_items AS target USING orders_items AS source ON target.order_item_key = source.order_item_key
+WHEN MATCHED
+AND (
+  target.base_price <> source.base_price
+  OR target.discounted_price <> source.discounted_price
+  OR target.quantity <> source.quantity
+  OR target.net_item_sales_amount <> source.net_item_sales_amount
+  OR target.ship_date <> source.ship_date
+) THEN
+UPDATE
+SET
+  target.base_price = source.base_price,
+  target.discounted_price = source.discounted_price,
+  target.quantity = source.quantity,
+  target.net_item_sales_amount = source.net_item_sales_amount,
+  target.ship_date = source.ship_date,
+  target.dbt_batch_ts = CURRENT_TIMESTAMP()
+  WHEN NOT MATCHED THEN
+INSERT
+  (
+    order_item_key,
+    order_key,
+    order_date,
+    customer_key,
+    base_price,
+    discounted_price,
+    quantity,
+    net_item_sales_amount,
+    ship_date,
+    dbt_batch_ts
+  )
+VALUES
+  (
+    source.order_item_key,
+    source.order_key,
+    source.order_date,
+    source.customer_key,
+    source.base_price,
+    source.discounted_price,
+    source.quantity,
+    source.net_item_sales_amount,
+    source.ship_date,
+    CURRENT_TIMESTAMP()
+  );
