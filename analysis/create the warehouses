@@ -1,0 +1,70 @@
+create role data_engineer;
+grant role data_engineer to user jeff;
+grant all on warehouse xs_gen2 to role data_engineer;
+grant all on warehouse xs_gen1 to role data_engineer;
+
+create warehouse m_gen1
+resource_constraint = standard_gen_1
+WAREHOUSE_SIZE = MEDIUM
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+create warehouse xl_gen2
+resource_constraint = standard_gen_2
+WAREHOUSE_SIZE = XLARGE
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+create warehouse xl_gen1
+resource_constraint = standard_gen_1
+WAREHOUSE_SIZE = XLARGE
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+create warehouse m_gen2
+resource_constraint = standard_gen_2
+WAREHOUSE_SIZE = MEDIUM
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+create warehouse xxl_gen1
+resource_constraint = standard_gen_1
+WAREHOUSE_SIZE = XXLARGE
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+create warehouse xxl_gen2
+resource_constraint = standard_gen_2
+WAREHOUSE_SIZE = XXLARGE
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+create warehouse x4l_gen2
+resource_constraint = standard_gen_2
+WAREHOUSE_SIZE = X4LARGE
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+create warehouse x4l_gen1
+resource_constraint = standard_gen_1
+WAREHOUSE_SIZE = X4LARGE
+AUTO_SUSPEND = 60
+initially_suspended = true
+;
+
+
+grant all on warehouse x4l_gen2 to role data_engineer;
+grant all on warehouse x4l_gen1 to role data_engineer;
+grant all on warehouse xxl_gen2 to role data_engineer;
+grant all on warehouse xxl_gen1 to role data_engineer;
+grant all on warehouse xl_gen2 to role data_engineer;
+grant all on warehouse xl_gen1 to role data_engineer;
+grant all on warehouse m_gen2 to role data_engineer;
+grant all on warehouse m_gen1 to role data_engineer;
