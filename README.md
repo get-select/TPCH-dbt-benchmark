@@ -1,7 +1,5 @@
-# dbt TPC-H Sample
-
-## Are you here for Snowflake Gen 2 Warehouses?
-### Decoding the blog article:
+# Are you here for Snowflake Gen 2 Warehouses?
+## Decoding the blog article:
 - `dbt build` means building this project wide open.
 - Other queries mentioned in the blog are found in the analysis folder.
 - Create warehouse scripts are also found in analysis folder.
