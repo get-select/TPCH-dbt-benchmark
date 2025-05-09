@@ -14,3 +14,16 @@ update fct_orders_items
 set commit_date = order_date
 where ship_date = '1998-08-07';
 -- ran in two differnet schemas to avoid any cache issues
+
+
+-- single row update
+-- gen 1
+update fct_orders_items
+set order_date = current_date
+where order_item_key = '11584844c03a46383ab21aa94ec2dea4';
+
+-- gen 2
+update fct_orders_items
+set order_date = current_date
+where order_item_key =
+'13651b0ce39313eee2a6df2ec414fd1f';
