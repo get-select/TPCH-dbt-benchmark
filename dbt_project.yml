@@ -41,5 +41,5 @@ models:
 on-run-start:
   - "alter session set USE_CACHED_RESULT = false"
 
-on-run-end:
-  - "ALTER WAREHOUSE {{ target.warehouse }} SUSPEND;"
+# on-run-end:
+#   - "ALTER WAREHOUSE {{ target.warehouse }} SUSPEND;"
