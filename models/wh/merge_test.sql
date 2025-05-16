@@ -6,11 +6,13 @@
     materialized = 'incremental',
     unique_key = 'order_item_key',
     merge_strategy = 'merge',
-    tags = ['merge-test']
+    tags = ['merge-test'],
+    pre_hook = ["ALTER SESSION SET USE_CACHED_RESULT = FALSE"]
     )
 }}
 
 -- if incremental, select * from pre_merge else select * from fct_orders_items
+with source_data1 as (
 select
 *
 from
@@ -20,3 +22,6 @@ from
         {{ ref('fct_orders_items') }}
     {% endif %}
 
+)
+
+select * from source_data1
